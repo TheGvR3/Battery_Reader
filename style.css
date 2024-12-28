@@ -30,20 +30,29 @@ body {
     position: relative;
     width: 270px;
     height: 240px;
-    background: #222;
+    background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
     padding: 0.5rem 1.5rem;
     border-radius: 1.5rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .Btext {
     margin-bottom: 0.5rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
 }
 
 .Bpercentage {
     font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #fff, #ccc);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .Bstatus {
@@ -63,10 +72,14 @@ body {
     position: relative;
     width: 75px;
     height: 180px;
-    background-color: #222;
-    box-shadow: inset 20px 0 48px hsl(0, 0%, 16%), inset -4px 12px 48px hsl(0, 0%, 56%);
+    background-color: rgba(34, 34, 34, 0.8);
+    box-shadow: 
+        inset 20px 0 48px hsl(0, 0%, 16%),
+        inset -4px 12px 48px hsl(0, 0%, 56%),
+        0 0 15px rgba(0, 0, 0, 0.3);
     border-radius: 3rem;
     justify-self: flex-start;
+    backdrop-filter: blur(5px);
 }
 
 .Blevel {
@@ -83,8 +96,11 @@ body {
     right: 0;
     height: 36px;
     background: var(--gradient-color-red);
-    box-shadow: inset -10px 0 12px hsla(0, 0%, 0%, 0.1), inset 12px 0 12px hsla(0, 0%, 0%, 0.15);
-    transition: height 0.3s, background 0.3s;
+    box-shadow: 
+        inset -10px 0 12px hsla(0, 0%, 0%, 0.1),
+        inset 12px 0 12px hsla(0, 0%, 0%, 0.15),
+        0 0 10px rgba(255, 255, 255, 0.1);
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s;
 }
 
 .Bliquid::after {
@@ -123,18 +139,22 @@ body {
 @keyframes animated-charging {
     0% {
         text-shadow: none;
+        opacity: 0.8;
     }
     100% {
-        text-shadow: 0 0 6px hsl(92, 90%, 68%);
+        text-shadow: 0 0 10px hsl(92, 90%, 68%);
+        opacity: 1;
     }
 }
 
 @keyframes animated-low {
     0% {
         text-shadow: none;
+        opacity: 0.8;
     }
     100% {
-        text-shadow: 0 0 8px hsl(7, 89%, 46%);
+        text-shadow: 0 0 12px hsl(7, 89%, 46%);
+        opacity: 1;
     }
 }
 
@@ -153,4 +173,55 @@ body {
 
 .gradient-color-yellow {
     background: var(--gradient-color-yellow);
+}
+
+.controls {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ctrl-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 0.8rem;
+    background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+    color: #fff;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ctrl-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+}
+
+.ctrl-btn:active {
+    transform: translateY(0);
+}
+
+.ctrl-btn.charging-toggle {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+}
+
+.ctrl-btn.charging-toggle.active {
+    background: var(--gradient-color-green);
+    color: #000;
+}
+
+.ctrl-btn.auto-toggle.active {
+    background: var(--gradient-color-yellow);
+    color: #000;
+}
+
+.ctrl-btn i {
+    margin-right: 0.3rem;
+    vertical-align: middle;
 }
