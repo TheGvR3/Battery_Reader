@@ -49,8 +49,15 @@ function initBattery() {
     const toggleControls = (enable) => {
         const buttons = document.querySelectorAll('.ctrl-btn:not(.auto-toggle)');
         buttons.forEach(btn => {
-            btn.style.opacity = enable ? '1' : '0.5';
-            btn.style.pointerEvents = enable ? 'auto' : 'none';
+            if (enable) {
+                btn.removeAttribute('disabled');
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            } else {
+                btn.setAttribute('disabled', 'disabled');
+                btn.style.opacity = '0.5';
+                btn.style.pointerEvents = 'none';
+            }
         });
     };
 
@@ -105,6 +112,26 @@ function initBattery() {
             });
         });
     }
+
+    addTouchSupport();
 }
+
+// Aggiungi questa funzione per gestire meglio gli eventi touch
+const addTouchSupport = () => {
+    const buttons = document.querySelectorAll('.ctrl-btn');
+    
+    buttons.forEach(button => {
+        // Previeni il comportamento di default del touch
+        button.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            button.click(); // Simula il click
+        }, { passive: false });
+        
+        // Previeni lo zoom su doppio tap
+        button.addEventListener('dblclick', (e) => {
+            e.preventDefault();
+        });
+    });
+};
 
 initBattery();
